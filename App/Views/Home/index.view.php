@@ -1,31 +1,33 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <img src="public/images/vaiicko_logo.png">
-                <p>
-                    Gratulujeme vám, úspešne sa vám podarilo nainštalovať a spustiť framework
-                    <strong>Vaííčko</strong> <?= \App\Config\Configuration::FW_VERSION ?>!<br>
-                    Dúfame, že sa Vám pomocou tohto frameworku vytvoríte nejakú skvelú aplikáciu.<br>
-                </p>
-                <p>
-                    Tento jednoduchý framework bol vytvorený pre lepšie pochopenie architektúry MVC.<br>
-                    Je určený pre študentov predmetu <em>vývoj aplikácií pre internet a intranet</em>, ale nielen im.
-                </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hlavna Stranka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/css/homePage.css">
+</head>
+<body>
+
+<div class="telo">
+    <div class="popis-stranky">
+        <p>Welcome to <span>ScrambledEgg</span></p>
+        <p>This is a webpage created by a fan of DND and character creation.
+            Use it to share your creations with other members of the community.</p>
+    </div>
+    <div class="sekcia-COTD">
+        <h2>Character Of The Day:</h2>
+        <div class="character-of-the-day">
+            <h2>Lyra Moonshadow</h2>
+            <img src="public/images/character6.jpg" alt="Character Image" >
+            <div class="character-of-the-day-description">
+                <p>Class: Sorcerer</p>
+                <p>Description: Mystery, driven, natural talent</p>
+                <p>Author: QuantumWanderer</p>
             </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Autori</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">doc. Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-<?= date('Y') ?> Žilinská univerzita v Žiline, Fakulta riadenia a informatiky, Katedra
-                softvérových technológií
-            </div>
-        </div>
-    </div>
+
+
 </div>
+</body>
+</html>

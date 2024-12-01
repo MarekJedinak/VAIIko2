@@ -1,0 +1,79 @@
+.telo {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+.character-of-the-day, .popis-stranky {
+    box-sizing: border-box;
+    width: 100%;
+}
+.popis-stranky {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: ui-sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 20px;
+    max-width: 430px;
+}
+.popis-stranky p {
+    margin: 0;
+}
+.popis-stranky span {
+    font-weight: bold;
+}
+
+.sekcia-COTD {
+
+}
+.character-of-the-day {
+    text-align: center;
+    background-color: #ffb074;
+    margin-right: 20px;
+    width: 100%;
+    max-width: 350px;
+    max-height: 600px;
+    border: 3px solid black;
+}
+.sekcia-COTD h2 {
+    font-family: ui-sans-serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.character-of-the-day img {
+    max-width: 100%;
+    height: auto;
+}
+.character-of-the-day-description {
+    padding: 20px;
+    text-align: left;
+    font-size: 17px;
+    font-family: ui-sans-serif;
+    line-height: 1;
+}
+@media only screen and (min-width: 768px) {
+    .telo {
+        justify-content: center;
+    }
+
+    .character-of-the-day, .popis-stranky {
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 950px) {
+    .telo {
+        justify-content: space-between;
+    }
+
+    .popis-stranky {
+        font-size: 20px;
+        margin-left: 100px;
+    }
+}

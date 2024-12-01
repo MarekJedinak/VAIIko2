@@ -39,4 +39,12 @@ class HomeController extends AControllerBase
     {
         return $this->html();
     }
+    public function charactersPage(): Response
+    {
+        return $this->html();
+    }
+    public function createCharacterPage(): Response
+    {
+        return $this->html();
+    }
 }

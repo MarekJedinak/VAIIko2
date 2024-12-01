@@ -1,0 +1,46 @@
+.telo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.telo h3 {
+    border-bottom: 2px solid black;
+    font-size: 2rem;
+}
+.list-of-characters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+    max-width: 1440px;
+    gap: 20px;
+    padding-top: 20px;
+
+}
+.item {
+    text-align: center;
+    max-width: 250px;
+    background-color: #7c98a3;
+    border: 1px solid black;
+}
+.item span {
+    font-weight: bold;
+}
+.item img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+.item p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .telo h3 {
+        font-size: 3rem;
+    }
+}
