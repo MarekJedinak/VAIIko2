@@ -21,7 +21,10 @@
         <label for="password" class="form-label">Password:</label>
         <input type="text" class="form-control" id="password" name="password" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" id="login" class="btn btn-primary">Login</button>
 </form>
+
+<script src="public/js/loginPage_script.js"></script>
+
 </body>
 </html>

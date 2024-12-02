@@ -27,7 +27,11 @@
         <label for="characterPhoto" class="form-label">Upload Photo:</label>
         <input class="form-control" type="file" id="characterPhoto" name="characterPhoto">
     </div>
-    <button type="submit" class="btn btn-primary">Create Character</button>
+    <button type="submit" id="createCharacter" class="btn btn-primary">Create Character</button>
 </form>
+
+<script src="public/js/createCharacterPage_script.js"></script>
+
+
 </body>
 </html>

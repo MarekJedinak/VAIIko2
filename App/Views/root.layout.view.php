@@ -39,8 +39,5 @@
         <?= $contentHTML ?>
     </div>
 </div>
-
-
-
 </body>
 </html>
