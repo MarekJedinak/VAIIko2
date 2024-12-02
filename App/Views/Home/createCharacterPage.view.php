@@ -25,7 +25,7 @@
     </div>
     <div class="mb-3">
         <label for="characterPhoto" class="form-label">Upload Photo:</label>
-        <input class="form-control" type="file" id="characterPhoto" name="characterPhoto">
+        <input class="form-control" type="file" id="characterPhoto" name="characterPhoto" accept="image/jpeg, image/png">
     </div>
     <button type="submit" id="createCharacter" class="btn btn-primary">Create Character</button>
 </form>
