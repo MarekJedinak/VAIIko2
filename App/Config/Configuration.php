@@ -15,8 +15,8 @@ class Configuration
     /**
      * App name
      */
-    public const APP_NAME = 'Vaííčko MVC FW';
-    public const FW_VERSION = '2.2';
+    public const APP_NAME = 'ScrambledEgg';
+    public const FW_VERSION = '1.0';
 
     /**
      * DB settings
