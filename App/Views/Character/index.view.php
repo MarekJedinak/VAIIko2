@@ -1,10 +1,11 @@
+
 <?php
 
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
 /** @var \App\Core\LinkGenerator $link */
 /** @var Array $data */
-/** @var \App\Models\character $character */
+/** @var \App\Models\Character $character */
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,10 @@
                 <p>Class: Sorcerer</p>
                 <p>Description: Mystery, driven, natural talent</p>
                 <p>Author: QuantumWanderer</p>
-                <?php foreach ($data['characters'] as $character) : ?> a <?php endforeach; ?>
+                <?php foreach ($data['characters'] as $character) : ?>
+                    <?= $character->getCharacterName() ?>
+
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

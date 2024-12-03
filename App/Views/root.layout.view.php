@@ -31,6 +31,8 @@
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.charactersPage") ?>'">CHARACTERS</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.createCharacterPage") ?>'">CREATE CHARACTER</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.loginPage") ?>'">LOGIN</button></li>
+        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.charactersPage") ?>'">chara</button></li>
+
     </ul>
 </nav>
 
