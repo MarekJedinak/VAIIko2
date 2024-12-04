@@ -1,5 +1,4 @@
 document.getElementById('createCharacter').addEventListener('click', function (event) {
-    event.preventDefault();
 
     const characterName = document.getElementById("characterName").value;
     const characterClass = document.getElementById("characterClass").value;
@@ -46,5 +45,14 @@ document.getElementById('createCharacter').addEventListener('click', function (e
         if (file.size > maxFileSize) {
             alert('Image file is too LARGE (max 2MB)');
         }
+    }
+    let hasError = nameError ||
+        !characterClass.trim() ||
+        !characterDescription.trim() ||
+        !characterPhoto.files.length ||
+        (characterPhoto.files[0].size > 2 * 1024 * 1024);
+
+    if (hasError) {
+        event.preventDefault();  // zastavíme odoslanie len ak sú chyby
     }
 })

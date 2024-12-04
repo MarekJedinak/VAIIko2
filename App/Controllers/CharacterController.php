@@ -82,7 +82,7 @@ class CharacterController extends AControllerBase
         $newCharacter->setCharacterImage($characterImage);
 
         $newCharacter->save();
-        
+
         return $this->redirect($this->url("character.charactersPage"));
     }
 }
