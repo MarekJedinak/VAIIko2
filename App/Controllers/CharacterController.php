@@ -25,6 +25,10 @@ class CharacterController extends AControllerBase
     {
         return $this->html();// TODO: Implement index() method.
     }
+    public function deleteCharacterPage(): Response
+    {
+        return $this->html();// TODO: Implement index() method.
+    }
 
     public function save() : Response
     {
@@ -42,5 +46,16 @@ class CharacterController extends AControllerBase
 
         $character->save();
 
-        return $this->redirect($this->url("character.charactersPage"));    }
+        return $this->redirect($this->url("character.charactersPage"));
+    }
+
+    public function delete() : Response
+    {
+        $id = (int) $this->request()->getValue('id');
+        $character = Character::getOne($id);
+        $character->delete();
+
+
+        return $this->redirect($this->url("character.charactersPage"));
+    }
 }

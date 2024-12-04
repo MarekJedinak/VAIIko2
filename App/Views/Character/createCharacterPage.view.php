@@ -39,8 +39,15 @@
                     <div class="input-group mb-5 d-flex justify-content-between">
                     </div>
                     <div class="input-group mb-3">
-                        <button id="login_button" class="btn btn-lg btn-dark w-100 fs-6">Pridať</button>
+                        <button id="create_button" class="btn btn-lg btn-dark w-100 fs-6">Create</button>
                     </div>
+                    <div class="input-group mb-4">
+                        <input id="id" name="id" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Id of character">
+                    </div>
+                    <div>
+                        <button id="delete_button" class="btn btn-lg btn-dark w-100 fs-6">Delete</button>
+                    </div>
+
                 </div>
             </div>
 
