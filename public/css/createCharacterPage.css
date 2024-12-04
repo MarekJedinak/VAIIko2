@@ -10,7 +10,7 @@ body {
 .container {
     flex: auto;
     width: 100%;
-    max-width: 800px; /* Zväčšená šírka z 400px na 800px */
+    max-width: 500px; /* Zväčšená šírka z 400px na 800px */
     margin: 0 auto;
 }
 

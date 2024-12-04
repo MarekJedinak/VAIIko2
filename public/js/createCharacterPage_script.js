@@ -20,7 +20,7 @@ document.getElementById('createCharacter').addEventListener('click', function (e
     if (!characterName || characterName.trim() === '') {
         spravaName = 'You forgor to enter Name of your Character!';
         nameError = true;
-    } else if (characterName.length > 15) {
+    } else if (characterName.length > 20) {
         spravaName = 'Character name is too long!';
         nameError = true;
     } else if (hasSpecialSymbols) {
