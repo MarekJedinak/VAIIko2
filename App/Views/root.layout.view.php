@@ -28,8 +28,8 @@
 <nav>
     <ul>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.index") ?>'">HOME</button></li>
-        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.charactersPage") ?>'">CHARACTERS</button></li>
-        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.createCharacterPage") ?>'">CREATE CHARACTER</button></li>
+        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.charactersPage") ?>'">CHARACTERS</button></li>
+        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.createCharacterPage") ?>'">CREATE CHARACTER</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.loginPage") ?>'">LOGIN</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.charactersPage") ?>'">chara</button></li>
 

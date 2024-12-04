@@ -21,4 +21,26 @@ class CharacterController extends AControllerBase
             'characters' => Character::getAll()
         ]);// TODO: Implement index() method.
     }
+    public function createCharacterPage(): Response
+    {
+        return $this->html();// TODO: Implement index() method.
+    }
+
+    public function save() : Response
+    {
+        $characterName = $this->request()->getValue('characterName');
+        $characterClass = $this->request()->getValue('characterClass');
+        $characterDescription = $this->request()->getValue('characterDescription');
+        $characterImage = $this->request()->getFiles()['characterImage']['name'];
+
+        $character = new Character();
+        $character->setCharacterName($characterName);
+        $character->setCharacterClass($characterClass);
+        $character->setCharacterDescription($characterDescription);
+        $character->setCharacterImage($characterImage);
+
+
+        $character->save();
+
+        return $this->redirect($this->url("character.charactersPage"));    }
 }
