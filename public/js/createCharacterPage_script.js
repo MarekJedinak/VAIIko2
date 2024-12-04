@@ -4,7 +4,7 @@ document.getElementById('createCharacter').addEventListener('click', function (e
     const characterName = document.getElementById("characterName").value;
     const characterClass = document.getElementById("characterClass").value;
     const characterDescription = document.getElementById("characterDescription").value;
-    const characterPhoto = document.getElementById("characterPhoto");
+    const characterPhoto = document.getElementById("characterImage");
 
     let specialSymbols = '.,!?@%&$#';
     let hasSpecialSymbols = false;

@@ -50,32 +50,34 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" action="<?= $link->url('character.save')?>" enctype="multipart/form-data">
+    <?php if ($data !== null): ?>
+    <form method="post" action="<?= $link->url('character.update')?>" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="form-container p-4">
                     <div class="header-text mb-4 text-center">
                         <h2>CREATE CHARACTER</h2>
                     </div>
-
+                    <input type="hidden" name="characterId" value="<?=htmlspecialchars($data->getId())?>">
                     <div class="mb-3">
                         <label for="characterName" class="form-label">Character Name:</label>
                         <div class="input-group">
-                            <input id="characterName" name="characterName" type="text" class="form-control form-control-lg fs-6" placeholder="Name of the character">
+                            <input id="characterName" name="characterName" type="text" class="form-control form-control-lg fs-6" placeholder="Name of the character"
+                                value="<?=htmlspecialchars($data->getCharacterName())?>">
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label for="characterClass" class="form-label">Character Class:</label>
                         <div class="input-group">
-                            <input id="characterClass" name="characterClass" type="text" class="form-control form-control-lg fs-6" placeholder="Class of the character">
+                            <input id="characterClass" name="characterClass" type="text" class="form-control form-control-lg fs-6" placeholder="Class of the character"
+                                value="<?=htmlspecialchars($data->getCharacterClass())?>">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="characterDescription" class="form-label">Character Description:</label>
                         <div class="input-group">
-                            <textarea class="form-control" name="characterDescription" placeholder="Character Description" id="characterDescription" style="height: 7em; resize: none;"></textarea>
+                            <textarea class="form-control" name="characterDescription" placeholder="Character Description" id="characterDescription" style="height: 7em; resize: none;"><?=htmlspecialchars($data->getCharacterDescription())?></textarea>
                         </div>
                     </div>
 
@@ -85,14 +87,13 @@
                     </div>
 
                     <div class="button-group">
-                        <button id="createCharacter" class="btn btn-dark">Create</button>
+                        <button id="update_button" class="btn btn-dark">Edit</button>
                     </div>
                 </div>
             </div>
     </form>
-
+    <?php endif; ?>
+    <script src="public/js/createCharacterPage_script.js"></script>
 </div>
-<script src="public/js/createCharacterPage_script.js"></script>
-
 </body>
 </html>
