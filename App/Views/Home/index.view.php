@@ -32,7 +32,6 @@
                 <p>Class: Sorcerer</p>
                 <p>Description: Mystery, driven, natural talent</p>
                 <p>Author: QuantumWanderer</p>
-                <?php foreach ($data['characters'] as $character) : ?> a <?php endforeach; ?>
             </div>
         </div>
     </div>
