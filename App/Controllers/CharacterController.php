@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Request;
+use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
 use App\Models\Character;
 
@@ -46,10 +47,18 @@ class CharacterController extends AControllerBase
         $character->setCharacterDescription($characterDescription);
         $character->setCharacterImage($characterImage);
 
-
-        $character->save();
-
-        return $this->redirect($this->url("character.charactersPage"));
+        $formErrors = $this->formErrors();
+        if (count($formErrors)) {
+            return $this->html(
+                [
+                    'character' => $character,
+                    'errors' => $formErrors,
+                ], 'createCharacterPage'
+            );
+        } else {
+            $character->save();
+            return new RedirectResponse($this->url("character.charactersPage"));
+        }
     }
 
     public function delete() : Response
@@ -81,8 +90,35 @@ class CharacterController extends AControllerBase
         $newCharacter->setCharacterDescription($characterDescription);
         $newCharacter->setCharacterImage($characterImage);
 
-        $newCharacter->save();
+        $formErrors = $this->formErrors();
+        if (count($formErrors)) {
+            return $this->html(
+                [
+                    'character' => $characterId,
+                    'errors' => $formErrors,
+                ], 'createCharacterPage'
+            );
+        } else {
+            $newCharacter->save();
+            return new RedirectResponse($this->url("home.index"));
+        }
+    }
 
-        return $this->redirect($this->url("character.charactersPage"));
+    public function formErrors(): array {
+        $errors = [];
+        if ($this->request()->getValue('characterName') == "") {
+            $errors[] = "Pole character name musi byt vyplnene";
+        }
+        if ($this->request()->getValue('characterClass') == "") {
+            $errors[] = "Pole character class musi byt vyplnene";
+        }
+        if ($this->request()->getValue('characterDescription') == "") {
+            $errors[] = "Pole character description musi byt vyplnene";
+        }
+        $dlzka = strlen($this->request()->getValue('characterName'));
+        if ($this->request()->getValue('characterName') != "" && $dlzka > 20) {
+            $errors[] = "Pole character name musi mat menej ako 20 pismen";
+        }
+        return $errors;
     }
 }
