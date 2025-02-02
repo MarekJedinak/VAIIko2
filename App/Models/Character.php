@@ -6,13 +6,24 @@ use App\Core\Model;
 
 class character extends Model
 {
+
     protected ?string $character_name = null;
     protected ?string $character_class = null;
     protected ?string $character_description = null;
     protected ?string $character_image= null;
     protected ?string $author = null;
     protected ?int $id;
+    protected ?int $user_id = null;
 
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?int $user_id): void
+    {
+        $this->user_id = $user_id;
+    }
     public function getAuthor(): ?string
     {
         return $this->author;

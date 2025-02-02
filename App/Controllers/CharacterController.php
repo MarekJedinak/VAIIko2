@@ -100,7 +100,7 @@ class CharacterController extends AControllerBase
             );
         } else {
             $newCharacter->save();
-            return new RedirectResponse($this->url("home.index"));
+            return new RedirectResponse($this->url("character.charactersPage"));
         }
     }
 

@@ -1,4 +1,9 @@
 <?php
+/** @var string $contentHTML */
+/** @var \App\Core\IAuthenticator $auth */
+/** @var \App\Core\LinkGenerator $link */
+/** @var Array $data */
+/** @var \App\Models\User $user */
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -10,8 +15,11 @@
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
-<form class="form" method="POST" action="" enctype="multipart/form-data">
-    <h3>Login</h3>
+<form class="form" method="post" action="<?= $link->url('auth.save_user') ?>" id="formId" enctype="multipart/form-data">
+    <h3>Register</h3>
+    <div class="text-center text-danger mb-3">
+        <?= @$data['errors'][0] ?>
+    </div>
     <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
         <input type="text" class="form-control" id="username" name="username"
@@ -21,7 +29,12 @@
         <label for="password" class="form-label">Password:</label>
         <input type="text" class="form-control" id="password" name="password" placeholder="Password">
     </div>
-    <button type="submit" id="login" class="btn btn-primary">Login</button>
+    <div class="mb-3">
+        <label for="confirm-password" class="form-label">Confirm Password:</label>
+        <input type="text" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
+    </div>
+
+    <button type="submit" id="register" class="btn btn-primary">Register</button>
 </form>
 
 <script src="public/js/loginPage_script.js"></script>
