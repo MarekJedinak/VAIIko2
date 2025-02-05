@@ -1,8 +1,18 @@
-// Získať prvky
 const profileBtn = document.getElementById('profileBtn');
 const profileDropdown = document.getElementById('profileDropdown');
 
-// Po kliknutí na ikonku zobraz/skry dropdown
+let variable1 = document.getElementById("demo1");
+function getlocation() {
+    navigator.geolocation.getCurrentPosition(showLoc);
+}
+function showLoc(pos) {
+    variable1.innerHTML =
+        "Latitude: " +
+        pos.coords.latitude +
+        "<br>Longitude: " +
+        pos.coords.longitude;
+}
+
 profileBtn.addEventListener('click', () => {
     if (profileDropdown.style.display === 'block') {
         profileDropdown.style.display = 'none';
@@ -11,9 +21,7 @@ profileBtn.addEventListener('click', () => {
     }
 });
 
-// Ak chceš, aby dropdown zmizol po kliknutí niekde inde na stránke:
 window.addEventListener('click', (e) => {
-    // ak cieľ nie je samotný button ani dropdown, skry dropdown
     if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
         profileDropdown.style.display = 'none';
     }

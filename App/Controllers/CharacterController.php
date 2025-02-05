@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Request;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
 use App\Models\Character;
@@ -39,12 +40,18 @@ class CharacterController extends AControllerBase
         $characterName = $this->request()->getValue('characterName');
         $characterClass = $this->request()->getValue('characterClass');
         $characterDescription = $this->request()->getValue('characterDescription');
-        $characterImage = $this->request()->getFiles()['characterImage']['name'];
+        $characterImage = $this->request()->getFiles()['characterImage'];
+        //$characterImage = $this->request()->getFiles('characterImage');
+        $characterImage1 = $this->request()->getValue('characterImage');
+
 
         $character = new Character();
         $character->setCharacterName($characterName);
         $character->setCharacterClass($characterClass);
         $character->setCharacterDescription($characterDescription);
+
+        $characterImage = "nieco";
+
         $character->setCharacterImage($characterImage);
 
         $formErrors = $this->formErrors();
@@ -59,6 +66,25 @@ class CharacterController extends AControllerBase
             $character->save();
             return new RedirectResponse($this->url("character.charactersPage"));
         }
+    }
+
+    public function save_character(): JsonResponse {
+        $data = $this->request()->getRawBodyJSON();
+        $name = $data->name;
+        $class = $data->class;
+        $description = $data->description;
+        $photo = $data->photo;
+
+        $character = new Character();
+        $character->setCharacterName($name);
+        $character->setCharacterClass($class);
+        $character->setCharacterDescription($description);
+        $character->setCharacterImage($photo);
+
+        $character->save();
+
+        $output = 1;
+        return $this->json(["output" => $output]);
     }
 
     public function delete() : Response

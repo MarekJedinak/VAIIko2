@@ -35,6 +35,12 @@
             </div>
         </div>
     </div>
+    <p>Displaying location using Latitude and Longitude</p>
+
+    <button class="geeks" onclick="getlocation()">
+        Click Me
+    </button>
+    <p id="demo1"></p>
 
 
 </div>

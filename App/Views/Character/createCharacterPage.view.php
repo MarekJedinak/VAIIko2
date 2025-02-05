@@ -38,10 +38,12 @@
             <label for="characterImage" class="form-label">Upload Photo:</label>
             <input class="form-control" type="file" id="characterImage" name="characterImage" accept="image/jpeg, image/png">
         </div>
+        <div class="longblock" id="gallery"></div>
 
         <div class="text-center">
             <button id="createCharacter" type="submit" class="btn btn-dark">Create</button>
         </div>
+        
     </form>
 </div>
 <script src="public/js/createCharacterPage_script.js"></script>

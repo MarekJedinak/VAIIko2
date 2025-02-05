@@ -18,7 +18,8 @@
             foreach ($data['characters'] as $character) : ?>
                 <div class="item">
                     <div class="content">
-                        <img src="public/images/character<?= ($character->getId() % 11) + 1 ?>.jpg" alt="character">
+                        <img src="<?= $character->getCharacterImage() ?>" alt="character">
+                        <!--<img src="public/images/character<?= ($character->getId() % 11) + 1 ?>.jpg" alt="character">-->
                         <p>Name: <span class="item-name"><?= $character->getCharacterName()?></span></p>
                         <p>Class: <?= $character->getCharacterClass()?></p>
                         <p>Description: <?= $character->getCharacterDescription()?></p>
