@@ -38,7 +38,7 @@ class DummyAuthenticator implements IAuthenticator
             if ($user->getUsername() == $login) {
 
                 if (password_verify($password, $user->getPassword())) {
-                    $_SESSION['user'] = self::USERNAME;
+                    $_SESSION['user'] = $user->getId();
                     return true;
                 }
             }

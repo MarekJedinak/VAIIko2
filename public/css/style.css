@@ -50,11 +50,12 @@ nav {
 }
 
 nav ul {
+    display: flex;
+    align-items: center;
     list-style: none;
     justify-content: center;
     padding: 0;
     margin: 0;
-    display: flex;
 }
 
 nav li {
@@ -108,6 +109,44 @@ nav button {
     bottom: 0;
     left: 0;
 }
+
+.profile-container {
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+}
+
+.profile-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+}
+.profile-btn:hover {
+    border: 2px solid #ccc;
+}
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 4px;
+    min-width: 120px;
+    z-index: 999;
+}
+.profile-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f2f2f2;
+}
+
 
 @media only screen and (min-width: 768px) {
     header {

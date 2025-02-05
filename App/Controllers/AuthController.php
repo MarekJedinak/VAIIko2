@@ -7,6 +7,7 @@ namespace App\Controllers;
 
 use App\Config\Configuration;
 use App\Core\AControllerBase;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
 use App\Models\User;
@@ -38,14 +39,16 @@ class AuthController extends AControllerBase
         if (isset($formData['submit'])) {
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
-                return $this->redirect($this->url("admin.index"));
+                return $this->redirect($this->url("home.index"));
             }
         }
 
         $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         return $this->html($data);
     }
-
+    public function getId(): int {
+        return $this->app->getAuth()->getLoggedUserId();
+    }
     public function register(): Response {
         $sprava = $this->request()->getValue('errors');
         if ($sprava == null) {
@@ -57,6 +60,9 @@ class AuthController extends AControllerBase
 
     public function save_user(): Response {
         $username = $this->request()->getValue('username');
+
+        //$this->check_username();
+
         $password = $this->request()->getValue('password');
         $confirm_password = $this->request()->getValue('confirm-password');
 
@@ -75,6 +81,24 @@ class AuthController extends AControllerBase
                     ['errors' => $formErrors]));
 
     }
+
+    public function check_username (): JsonResponse {
+
+        $data = $this->request()->getRawBodyJSON();
+        $username = $data->username;
+
+        $users = User::getAll();
+        $output = 0;
+
+        foreach ($users as $user) {
+            if ($user->getUsername() == $username){
+                $output = 1;
+            }
+        }
+        return $this->json(["output" => $output]);
+
+    }
+
     /**
      * Logout a user
      * @return ViewResponse

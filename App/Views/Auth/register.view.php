@@ -37,7 +37,7 @@
     <button type="submit" id="register" class="btn btn-primary">Register</button>
 </form>
 
-<script src="public/js/loginPage_script.js"></script>
+<script src="public/js/registerPage_script.js"></script>
 
 </body>
 </html>

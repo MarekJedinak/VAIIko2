@@ -53,6 +53,6 @@ document.getElementById('createCharacter').addEventListener('click', function (e
         (characterPhoto.files[0].size > 2 * 1024 * 1024);
 
     if (hasError) {
-        event.preventDefault();  // zastavíme odoslanie len ak sú chyby
+        event.preventDefault();
     }
 })
