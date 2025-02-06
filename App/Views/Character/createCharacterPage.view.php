@@ -3,7 +3,6 @@
 /** @var \App\Core\IAuthenticator $auth */
 /** @var \App\Core\LinkGenerator $link */
 /** @var Array $data */
-/** @var \App\Models\Character $character */
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -16,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" action="<?= $link->url('character.save') ?>" id="formId" enctype="multipart/form-data">
+    <form method="post" action="" id="formId" enctype="multipart/form-data">
         <h2 class="text-center mb-4">CREATE CHARACTER</h2>
         <input type="hidden" name="characterId" id="characterId" value="">
         <div class="mb-3">

@@ -11,7 +11,7 @@ document.getElementById('createCharacter').addEventListener('click', async funct
     let form = document.getElementById('formId');
 
     if (!file && !characterId) {
-        alert("Prosím, vyberte súbor alebo zadajte Character ID.");
+        alert("Prosím, vyberte súbor");
         return;
     }
 
@@ -43,6 +43,10 @@ document.getElementById('createCharacter').addEventListener('click', async funct
             const data = await response.json();
             if (data["output"] === 1) {
                 alert('Character sa ulozil');
+            } else if (data["output"] === 2) {
+                data["errors"].forEach((error) => {
+                    alert(error);
+                });
             } else {
                 form.submit();
             }

@@ -25,3 +25,43 @@ Framework ma v adresári `<root>/docker` základnú konfiguráciu pre spustenie 
 - phpmyadmin server, ktorý sa automatický nastavený na databázový server na porte __8080__ a bude dostupný na
   adrese [http://localhost:8080/](http://localhost:8080/)
 
+# Návod
+
+Inštalácia PHPStorm
+
+ - Otvorte webový prehliadač a prejdite na oficiálnu stránku JetBrains PHPStorm. 
+ - Kliknite na tlačidlo Download (Stiahnuť). 
+ - Vyberte verziu podľa vášho operačného systému:
+ - - Windows
+ - - macOS
+ - - Linux
+ - Po stiahnutí spustite inštalačný súbor a postupujte podľa pokynov inštalátora.
+ - Po dokončení inštalácie spustite PHPStorm.
+ - Ak je to potrebné, prihláste sa do svojho JetBrains účtu.
+ 
+Inštalácia Dockeru
+
+- Otvorte webový prehliadač a prejdite na oficiálnu stránku Docker.
+- Kliknite na tlačidlo Download (Stiahnuť).
+- Vyberte verziu pre váš operačný systém:
+- Windows → Stiahnite a nainštalujte Docker Desktop for Windows.
+- macOS → Stiahnite a nainštalujte Docker Desktop for Mac.
+- Linux → Postupujte podľa pokynov pre váš konkrétny systém (napr. Ubuntu, Fedora).
+- Po stiahnutí spustite inštalačný súbor a postupujte podľa pokynov inštalátora.
+- Po dokončení inštalácie reštartujte počítač (ak je to potrebné).
+- Spustite Docker Desktop a uistite sa, že je aktívny.
+
+Spustenie Docker Compose v PHPStorm
+- Otvorte PHPStorm.
+- Vyhľadajte a otvorte súbor docker.
+- V súbore nájdite konfiguráciu docker-compose.
+- Spustite docker-compose a počkajte na jeho inicializáciu.
+
+Otvorenie lokálnej adresy v prehliadači
+- Po úspešnom spustení Docker Compose môžete otvoriť svoju PHP aplikáciu v prehliadači.
+- Spustite Google Chrome, Mozilla Firefox alebo iný prehliadač.
+- Do adresného riadka zadajte:
+http://127.0.0.1/
+- Ak všetko prebehlo správne, vaša aplikácia by mala byť dostupná na tejto adrese.
+
+

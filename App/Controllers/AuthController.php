@@ -82,24 +82,26 @@ class AuthController extends AControllerBase
         $password = $this->request()->getValue('password');
         $confirm_password = $this->request()->getValue('confirm-password');
 
+        $formErrors = $this->formErrors();
 
-        if ($password == $confirm_password) {
-            $user = new User();
-            $user->setUsername($username);
-            $password = password_hash($password, PASSWORD_BCRYPT);
-            $user->setPassword($password);
-            $user->save();
+        if (!$formErrors) {
+            if ($password == $confirm_password) {
+                $user = new User();
+                $user->setUsername($username);
+                $password = password_hash($password, PASSWORD_BCRYPT);
+                $user->setPassword($password);
+                $user->save();
 
-            $permission = new Permission();
-            $permission->setUserId($user->getId());
-            $permission->setPermission("user");
-            $permission->save();
+                $permission = new Permission();
+                $permission->setUserId($user->getId());
+                $permission->setPermission("user");
+                $permission->save();
 
-            return $this->redirect($this->url("home.index"));
+                return $this->redirect($this->url("home.index"));
 
+            }
         }
-            $formErrors = $this->formErrors();
-            return $this->redirect($this->url("auth.register",
+        return $this->redirect($this->url("auth.register",
                     ['errors' => $formErrors]));
 
     }
@@ -135,6 +137,12 @@ class AuthController extends AControllerBase
         $errors = [];
         if ($this->request()->getValue('password') != $this->request()->getValue('confirm-password')) {
             array_push($errors, "Nezadali ste rovnake heslo");
+        }
+        if ($this->request()->getValue('username') == "") {
+            array_push($errors, "Nezadali ste Meno");
+        }
+        if ($this->request()->getValue('password') == "") {
+            array_push($errors, "Nezadali ste Heslo");
         }
         return $errors;
         }

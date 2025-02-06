@@ -17,7 +17,7 @@
 <body>
 <div class="container">
     <?php if ($data !== null): ?>
-    <form method="post" action="<?= $link->url('character.update') ?>" id="formId" enctype="multipart/form-data">
+    <form method="post" action="" id="formId" enctype="multipart/form-data">
         <h2 class="text-center mb-4">EDIT CHARACTER</h2>
         <input type="hidden" name="characterId" id="characterId" value="<?=htmlspecialchars($data->getId())?>">
         <div class="mb-3">

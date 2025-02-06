@@ -17,12 +17,45 @@ class CharacterController extends AControllerBase
     {
         switch($action) {
 
+            case "save_character": {
+                $idcko = 1;
+                $data = $this->request()->getRawBodyJSON();
+                if ($data != null) {
+                    $idcko = $data->char_id;
+                }
+                if ($idcko == "") {
+                    return true;
+                }
+                $permissions = Permission::getAll();
+                $admin = 0;
+                foreach ($permissions as $permission) {
+                    if ($permission->getPermission() == "admin"){
+                        $admin = $permission->getUserId();
+                    }
+                }
+
+                $cha = Character::getOne($idcko);
+                if ($this->app->getAuth()->getLoggedUserId() == $cha->getUserId() ||
+                    $this->app->getAuth()->getLoggedUserId() == $admin) {
+                    return true;
+                }
+                return false;
+            }
             case "delete":
-            case "update":
             {
+                //$data = $this->request()->getRawBodyJSON();
+
                 $char_id = $this->request()->getValue("id");
                 $cha = Character::getOne($char_id);
-                if ($this->app->getAuth()->getLoggedUserId() == $cha->getUserId()) {
+                $permissions = Permission::getAll();
+                $admin = 0;
+                foreach ($permissions as $permission) {
+                    if ($permission->getPermission() == "admin"){
+                        $admin = $permission->getUserId();
+                    }
+                }
+                if ($this->app->getAuth()->getLoggedUserId() == $cha->getUserId() ||
+                    $this->app->getAuth()->getLoggedUserId() == $admin) {
                     return true;
                 }
                 return false;
@@ -96,29 +129,40 @@ class CharacterController extends AControllerBase
         $description = $data->description;
         $photo = $data->photo;
         $charId = $data->char_id;
-
+        $author = "";
+        $userId = 0;
         $character = null;
         $user = User::getOne($this->app->getAuth()->getLoggedUserId());
 
         if($charId == null) {
             $character = new Character();
+            $character->setAuthor($user->getUsername());
+            $character->setUserId($user->getId());
         } else {
             $character = Character::getOne($charId);
+            $author = Character::getOne($charId)->getAuthor();
+            $userId = Character::getOne($charId)->getUserId();
         }
+
+        $errs = $this->formErrors();
 
         $character->setCharacterName($name);
         $character->setCharacterClass($class);
         $character->setCharacterDescription($description);
         if ($photo) {
             $character->setCharacterImage($photo);
+        } else {
+            $errs[] = "Character neobsahuje obrazok";
         }
-        $character->setAuthor($user->getUsername());
-        $character->setUserId($user->getId());
-        if ($this->formErrors()) {
+        $character->setAuthor($author);
+        $character->setUserId($userId);
+        if (!$errs) {
             $character->save();
+            $output = 1;
+        } else {
+            $output = 2;
         }
-        $output = 1;
-        return $this->json(["output" => $output]);
+        return $this->json(["output" => $output, "errors" => $errs]);
     }
 
     public function delete() : Response
@@ -132,7 +176,7 @@ class CharacterController extends AControllerBase
         return $this->redirect($this->url("character.charactersPage"));
     }
 
-    public function update() : JsonResponse
+    /*public function update() : JsonResponse
     {
         $characterId = $this->request()->getValue('characterId');
         $characterName = $this->request()->getValue('characterName');
@@ -161,7 +205,7 @@ class CharacterController extends AControllerBase
         $output = 1;
         return $this->json(["output" => $output]);
 
-    }
+    }*/
 
     public function formErrors(): array {
         $errors = [];
@@ -175,9 +219,13 @@ class CharacterController extends AControllerBase
         if ($data->description == "") {
             $errors[] = "Pole character description musi byt vyplnene";
         }
-        $dlzka = $data->name;
-        if ($this->request()->getValue('characterName') != "" && $dlzka > 20) {
+        $dlzka = strlen($data->name);
+        if ($dlzka != "" && $dlzka > 20) {
             $errors[] = "Pole character name musi mat menej ako 20 pismen";
+        }
+        $dlzka = strlen($data->class);
+        if ($dlzka != "" && $dlzka > 20) {
+            $errors[] = "Pole character class musi mat menej ako 20 pismen";
         }
         return $errors;
     }

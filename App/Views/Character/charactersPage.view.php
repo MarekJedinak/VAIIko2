@@ -26,7 +26,8 @@
                         <p>Author: <?= $character->getAuthor()?></p>
                     </div>
                     <?php if ($auth->isLogged()) {
-                            if ($character->getAuthor() == \App\Models\User::getOne($auth->getLoggedUserId())->getUsername()) {
+                            if ($character->getAuthor() == \App\Models\User::getOne($auth->getLoggedUserId())->getUsername() ||
+                                  $auth->getLoggedUserId() == 1)  {
                                 ?>
                                 <div class="buttons">
                                     <a href="<?= $link->url('character.updateCharacterPage', ['id' => $character->getId()]) ?>" class="btn btn-outline-info btn-sm">
