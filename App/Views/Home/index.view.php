@@ -45,11 +45,11 @@
              style="background-image: url('public/images/weather.jpg'); background-size: 400px 325px"></div>
 
         <div class="relative z-10 text-black text-center">
-            <h2 class=" text-2xl font-bold">🌡 Aktuálna teplota</h2>
-            <p class="mt-2"><strong>Mesto:</strong> <span id="city1">Načítavam...</span></p>
+            <h2 class=" text-2xl font-bold">🌡 Weather</h2>
+            <p class="mt-2"><strong>City:</strong> <span id="city1">Načítavam...</span></p>
             <p><strong>Lat:</strong> <span id="lat">-</span></p>
             <p><strong>Long:</strong> <span id="long">-</span></p>
-            <p class="text-lg font-semibold mt-2"><strong>Teplota:</strong> <span id="temperature">--</span>°C</p>
+            <p class="text-lg font-semibold mt-2"><strong>Temperature:</strong> <span id="temperature">--</span>°C</p>
 
             <button class="btn btn-primary mt-4 w-full text-lg font-semibold" onclick="getlocation()">📍 Skontroluj počasie</button>
         </div>

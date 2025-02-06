@@ -48,4 +48,7 @@ class HomeController extends AControllerBase
     {
         return $this->html();
     }
+    public function profile(): Response {
+        return $this->html();
+    }
 }

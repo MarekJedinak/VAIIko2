@@ -1,0 +1,155 @@
+body {
+    background-color: #afc2c3;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #7794a1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    flex: 1;
+}
+
+.photo-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.profile-pic {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-pic img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #555;
+}
+
+.profile-pic input {
+    display: block;
+    margin: 10px auto;
+}
+
+.profile-info {
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-group input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 60%;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    max-height: 40px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.create-character {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333333;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+
+}
+
+.create-character-btn {
+    background-color: #ff6147;
+    border: none;
+    box-sizing: border-box;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.create-character-btn:after {
+    content: '';
+    position: absolute;
+    border: 2px solid black;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+}
+
+.create-character-btn:hover:after {
+    bottom: 0;
+    left: 0;
+}
+
+.create-character p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-changes-btn:hover {
+    background-color: #e64a19;
+}

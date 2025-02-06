@@ -25,6 +25,7 @@
                         <p>Description: <?= $character->getCharacterDescription()?></p>
                         <p>Author: <?= $character->getAuthor()?></p>
                     </div>
+                    <?php ?>
                     <div class="buttons">
                         <a href="<?= $link->url('character.updateCharacterPage', ['id' => $character->getId()]) ?>" class="btn btn-outline-info btn-sm">
                             <i class="fas fa-edit"></i> Edit

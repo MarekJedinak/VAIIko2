@@ -8,6 +8,7 @@ use App\Core\Responses\JsonResponse;
 use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
 use App\Models\Character;
+use App\Models\User;
 
 class CharacterController extends AControllerBase
 {
@@ -75,12 +76,14 @@ class CharacterController extends AControllerBase
         $description = $data->description;
         $photo = $data->photo;
 
+        $user = User::getOne($this->app->getAuth()->getLoggedUserId());
+
         $character = new Character();
         $character->setCharacterName($name);
         $character->setCharacterClass($class);
         $character->setCharacterDescription($description);
         $character->setCharacterImage($photo);
-
+        $character->setAuthor($user->getUsername());
         $character->save();
 
         $output = 1;

@@ -31,31 +31,52 @@
     <ul>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.index") ?>'">HOME</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.charactersPage") ?>'">CHARACTERS</button></li>
-        <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.createCharacterPage") ?>'">CREATE CHARACTER</button></li>
+        <!--<li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.createCharacterPage") ?>'">CREATE CHARACTER</button></li>-->
 
         <?php
-        $fotka = 0;
-        if($auth->isLogged()) {
-            $users = \App\Models\User::getAll();
-            foreach ($users as $user) {
-                if ($user->getId() == $auth->getLoggedUserId()){
-                    $fotka = $user->getId();
+        $photo = "public/images/profile-default-icon.png";
+        if ($auth->isLogged()) {
+            $profiles = \App\Models\Profilepic::getAll();
+            foreach ($profiles as $profile) {
+                if ($profile->getUserId() == $auth->getLoggedUserId()) {
+                    $newPhoto = $profile->getPicture();
+                    if ($newPhoto != $photo) {
+                        $photo = $newPhoto;
+                    }
                 }
             }
         }
-        ?>
-        <p><?= $fotka ?></p>
-        <li class="profile-container">
-            <img src="public/images/profile-default-icon.png"
-                 alt="Profil"
-                 class="profile-btn"
-                 id="profileBtn">
+        $uziv = 0;
 
-            <div class="profile-dropdown" id="profileDropdown">
-                <a href='<?= $link->url("auth.register") ?>'>Register</a>
-                <a href='<?= $link->url("auth.login") ?>'>Login</a>
-            </div>
-        </li>
+        if ($auth->isLogged()) {
+            $users = \App\Models\User::getAll();
+            foreach ($users as $user) {
+                if ($user->getId() == $auth->getLoggedUserId()) {
+                    $uziv = $user->getId();
+                    ?>
+                    <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("profile.profile") ?>'">PROFILE</button></li>
+                    <li class="profile-container">
+                        <img src="<?= htmlspecialchars($photo) ?>" alt="Profil" class="profile-btn" id="profileBtn">
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <a href='<?= $link->url("profile.profile") ?>'>Profile</a>
+                            <a href='<?= $link->url("auth.logout") ?>'>Logout</a>
+                            <a href='<?= $link->url("character.createCharacterPage") ?>'>Create Character</a>
+                        </div>
+                    </li>
+                    <?php
+                }
+            }
+        } else { ?>
+            <li class="profile-container">
+                <img src="<?= htmlspecialchars($photo) ?>" alt="Profil" class="profile-btn" id="profileBtn">
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href='<?= $link->url("auth.register") ?>'>Register</a>
+                    <a href='<?= $link->url("auth.login") ?>'>Login</a>
+                </div>
+            </li>
+        <?php } ?>
+
+        <p><?= $uziv ?></p>
     </ul>
 </nav>
 
