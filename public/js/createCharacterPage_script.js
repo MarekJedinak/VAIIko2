@@ -4,19 +4,21 @@ document.getElementById('createCharacter').addEventListener('click', async funct
     const characterName = document.getElementById("characterName").value;
     const characterClass = document.getElementById("characterClass").value;
     const characterDescription = document.getElementById("characterDescription").value;
-    const file = document.getElementById("characterImage").files[0];
+    const characterId = document.getElementById("characterId").value;
+    const fileInput = document.getElementById("characterImage");
+    const file = fileInput.files.length > 0 ? fileInput.files[0] : null;
 
     let form = document.getElementById('formId');
 
-
-    if (!file) {
-        alert("Prosím, vyberte súbor.");
+    if (!file && !characterId) {
+        alert("Prosím, vyberte súbor alebo zadajte Character ID.");
         return;
     }
 
     const reader = new FileReader();
-    reader.onloadend = async function() {
-        const base64String = reader.result;
+
+    reader.onloadend = async function () {
+        let base64String = file ? reader.result : null;
 
         let url = "http://127.0.0.1//?c=character&a=save_character";
         let body = {
@@ -24,9 +26,8 @@ document.getElementById('createCharacter').addEventListener('click', async funct
             "name": characterName,
             "class": characterClass,
             "description": characterDescription,
+            "char_id": characterId,
         };
-
-        event.preventDefault();
 
         let response = await fetch(url, {
             method: "POST",
@@ -40,18 +41,17 @@ document.getElementById('createCharacter').addEventListener('click', async funct
 
         if (response.ok) {
             const data = await response.json();
-            const output = data["output"];
-            if (output === 1) {
+            if (data["output"] === 1) {
                 alert('Character sa ulozil');
             } else {
                 form.submit();
             }
         }
-
-
     };
-    reader.readAsDataURL(file);
 
-    reader.onload();
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        reader.onloadend();
+    }
 });
-//document.getElementById("formId").submit();

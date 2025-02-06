@@ -95,18 +95,28 @@ class CharacterController extends AControllerBase
         $class = $data->class;
         $description = $data->description;
         $photo = $data->photo;
+        $charId = $data->char_id;
 
+        $character = null;
         $user = User::getOne($this->app->getAuth()->getLoggedUserId());
 
-        $character = new Character();
+        if($charId == null) {
+            $character = new Character();
+        } else {
+            $character = Character::getOne($charId);
+        }
+
         $character->setCharacterName($name);
         $character->setCharacterClass($class);
         $character->setCharacterDescription($description);
-        $character->setCharacterImage($photo);
+        if ($photo) {
+            $character->setCharacterImage($photo);
+        }
         $character->setAuthor($user->getUsername());
         $character->setUserId($user->getId());
-        $character->save();
-
+        if ($this->formErrors()) {
+            $character->save();
+        }
         $output = 1;
         return $this->json(["output" => $output]);
     }
@@ -145,8 +155,9 @@ class CharacterController extends AControllerBase
         $newCharacter->setAuthor($characterAuthor);
         $newCharacter->setUserId($characterUserId);
 
-
-        $newCharacter->save();
+        if ($this->formErrors()) {
+            $newCharacter->save();
+        }
         $output = 1;
         return $this->json(["output" => $output]);
 
@@ -154,16 +165,17 @@ class CharacterController extends AControllerBase
 
     public function formErrors(): array {
         $errors = [];
-        if ($this->request()->getValue('characterName') == "") {
+        $data = $this->request()->getRawBodyJSON();
+        if ($data->name == "") {
             $errors[] = "Pole character name musi byt vyplnene";
         }
-        if ($this->request()->getValue('characterClass') == "") {
+        if ($data->class == "") {
             $errors[] = "Pole character class musi byt vyplnene";
         }
-        if ($this->request()->getValue('characterDescription') == "") {
+        if ($data->description == "") {
             $errors[] = "Pole character description musi byt vyplnene";
         }
-        $dlzka = strlen($this->request()->getValue('characterName'));
+        $dlzka = $data->name;
         if ($this->request()->getValue('characterName') != "" && $dlzka > 20) {
             $errors[] = "Pole character name musi mat menej ako 20 pismen";
         }

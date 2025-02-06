@@ -18,7 +18,7 @@
 <div class="container">
     <form method="post" action="<?= $link->url('character.save') ?>" id="formId" enctype="multipart/form-data">
         <h2 class="text-center mb-4">CREATE CHARACTER</h2>
-
+        <input type="hidden" name="characterId" id="characterId" value="">
         <div class="mb-3">
             <label for="characterName" class="form-label">Name:</label>
             <input id="characterName" name="characterName" type="text" class="form-control" placeholder="Name of the character">

@@ -19,7 +19,7 @@
     <?php if ($data !== null): ?>
     <form method="post" action="<?= $link->url('character.update') ?>" id="formId" enctype="multipart/form-data">
         <h2 class="text-center mb-4">EDIT CHARACTER</h2>
-        <input type="hidden" name="characterId" value="<?=htmlspecialchars($data->getId())?>">
+        <input type="hidden" name="characterId" id="characterId" value="<?=htmlspecialchars($data->getId())?>">
         <div class="mb-3">
             <label for="characterName" class="form-label">Name:</label>
             <input id="characterName" name="characterName" type="text" class="form-control form-control-lg fs-6" placeholder="Name of the character"
