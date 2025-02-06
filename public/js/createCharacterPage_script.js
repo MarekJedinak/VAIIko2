@@ -18,7 +18,7 @@ document.getElementById('createCharacter').addEventListener('click', async funct
     reader.onloadend = async function() {
         const base64String = reader.result;
 
-        let url = "http://127.0.0.1//?c=character&a=update";
+        let url = "http://127.0.0.1//?c=character&a=save_character";
         let body = {
             "photo": base64String,
             "name": characterName,

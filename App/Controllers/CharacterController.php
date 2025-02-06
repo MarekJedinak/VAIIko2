@@ -17,7 +17,6 @@ class CharacterController extends AControllerBase
     {
         switch($action) {
 
-            case "save_character":
             case "delete":
             case "update":
             {
