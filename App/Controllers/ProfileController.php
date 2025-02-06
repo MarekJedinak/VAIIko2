@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Permission;
 use App\Models\profilepic;
 use App\Core\Request;
 use App\Core\Responses\JsonResponse;
@@ -13,6 +14,29 @@ use App\Models\User;
 
 class ProfileController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        switch($action) {
+
+            case "save_photo":
+            case "delete_photo":
+            case "update_photo":
+            case "create_photo":
+            {
+                if ($this->app->getAuth()->isLogged()) {
+                    $permission = Permission::getAll("user_id=?", [$this->app->getAuth()->getLoggedUserId()]);
+                    if (($permission[0]->getPermission() == "user")) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            default:
+            {
+                return true;
+            }
+        }
+    }
     public function index(): Response
     {
         return $this->html([
@@ -73,7 +97,7 @@ class ProfileController extends AControllerBase
         $profile->save();
     }
 
-    public function delete_photo() {
+    public function delete_photo(): JsonResponse {
         $profiles = Profilepic::getAll();
         foreach ($profiles as $profile) {
             if($profile->getUserId() == $this->app->getAuth()->getLoggedUserId()) {

@@ -8,8 +8,8 @@ class Permission extends Model
 {
 
     protected ?int $id;
-    protected ?int $user_id = null;
-    protected ?string $permission = null;
+    protected ?int $user_id;
+    protected ?string $permission;
 
 
     public function getId(): ?int

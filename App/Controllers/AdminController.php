@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\character;
+use App\Models\Permission;
 
 /**
  * Class HomeController
@@ -19,7 +21,11 @@ class AdminController extends AControllerBase
      */
     public function authorize($action)
     {
-        return $this->app->getAuth()->isLogged();
+        $permission = Permission::getOne($this->app->getAuth()->getLoggedUserId());
+        if ($permission->getPermission() == "admin") {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -29,5 +35,10 @@ class AdminController extends AControllerBase
     public function index(): Response
     {
         return $this->html();
+    }
+    public function table(): Response {
+        return $this->html([
+            'characters' => Character::getAll()
+        ]);
     }
 }

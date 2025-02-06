@@ -10,6 +10,7 @@ use App\Core\AControllerBase;
 use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
+use App\Models\Permission;
 use App\Models\User;
 
 /**
@@ -23,15 +24,33 @@ class AuthController extends AControllerBase
      *
      * @return Response
      */
+    public function authorize($action)
+    {
+        switch($action) {
+
+            case "changePassword":
+            case "delete":
+            {
+                if (!($this->app->getAuth()->isPermission("admin"))) {
+                    return false;
+                }
+            }
+            default:
+            {
+                return true;
+            }
+        }
+    }
+
     public function index(): Response
     {
         return $this->redirect(Configuration::LOGIN_URL);
     }
 
     /**
-     * Login a user
-     * @return Response
-     */
+    * Login a user
+    * @return Response
+    */
     public function login(): Response
     {
         $formData = $this->app->getRequest()->getPost();
@@ -42,13 +61,10 @@ class AuthController extends AControllerBase
                 return $this->redirect($this->url("home.index"));
             }
         }
-
         $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         return $this->html($data);
     }
-    public function getId(): int {
-        return $this->app->getAuth()->getLoggedUserId();
-    }
+
     public function register(): Response {
         $sprava = $this->request()->getValue('errors');
         if ($sprava == null) {
@@ -73,6 +89,12 @@ class AuthController extends AControllerBase
             $password = password_hash($password, PASSWORD_BCRYPT);
             $user->setPassword($password);
             $user->save();
+
+            $permission = new Permission();
+            $permission->setUserId($user->getId());
+            $permission->setPermission("user");
+            $permission->save();
+
             return $this->redirect($this->url("home.index"));
 
         }
@@ -100,9 +122,9 @@ class AuthController extends AControllerBase
     }
 
     /**
-     * Logout a user
-     * @return ViewResponse
-     */
+    * Logout a user
+    * @return ViewResponse
+    */
     public function logout(): Response
     {
         $this->app->getAuth()->logout();
@@ -115,5 +137,5 @@ class AuthController extends AControllerBase
             array_push($errors, "Nezadali ste rovnake heslo");
         }
         return $errors;
+        }
     }
-}

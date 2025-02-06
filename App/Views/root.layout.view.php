@@ -31,7 +31,19 @@
     <ul>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("home.index") ?>'">HOME</button></li>
         <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.charactersPage") ?>'">CHARACTERS</button></li>
-        <!--<li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("character.createCharacterPage") ?>'">CREATE CHARACTER</button></li>-->
+        <?php
+            if ($auth->isLogged()) {
+                $permissions = \App\Models\Permission::getAll();
+                foreach ($permissions as $permission) {
+                    if ($permission->getUserId() == $auth->getLoggedUserId()) {
+                        if ($permission->getPermission() == "admin"){ ?>
+                            <li><button type="button" class="characters-btn" onclick="window.location.href='<?= $link->url("admin.table") ?>'">TABLE</button></li>
+                        <?php
+                        }
+                    }
+                }
+            }
+        ?>
 
         <?php
         $photo = "public/images/profile-default-icon.png";

@@ -1,5 +1,4 @@
 document.getElementById('createCharacter').addEventListener('click', async function (event) {
-    // Zrušíme pôvodné správanie (odosielanie formulára) - chceme najskôr spracovať súbor
     event.preventDefault();
 
     const characterName = document.getElementById("characterName").value;
@@ -10,18 +9,16 @@ document.getElementById('createCharacter').addEventListener('click', async funct
     let form = document.getElementById('formId');
 
 
-    // Ak nebol vybraný žiadny súbor, môžeme buď pokračovať bez obrázka alebo zobraziť chybu
     if (!file) {
         alert("Prosím, vyberte súbor.");
         return;
     }
 
-    // Pripravíme FileReader
     const reader = new FileReader();
     reader.onloadend = async function() {
         const base64String = reader.result;
 
-        let url = "http://127.0.0.1//?c=character&a=save_character";
+        let url = "http://127.0.0.1//?c=character&a=update";
         let body = {
             "photo": base64String,
             "name": characterName,

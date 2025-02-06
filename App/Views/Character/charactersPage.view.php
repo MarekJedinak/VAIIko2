@@ -25,16 +25,19 @@
                         <p>Description: <?= $character->getCharacterDescription()?></p>
                         <p>Author: <?= $character->getAuthor()?></p>
                     </div>
-                    <?php if ($character->getAuthor() == \App\Models\User::getOne($auth->getLoggedUserId())->getUsername()) { ?>
-                        <div class="buttons">
-                            <a href="<?= $link->url('character.updateCharacterPage', ['id' => $character->getId()]) ?>" class="btn btn-outline-info btn-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="<?= $link->url("character.delete", ["id" => $character->getId()]) ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this character?')">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
-                        </div>
-                    <?php } ?>
+                    <?php if ($auth->isLogged()) {
+                            if ($character->getAuthor() == \App\Models\User::getOne($auth->getLoggedUserId())->getUsername()) {
+                                ?>
+                                <div class="buttons">
+                                    <a href="<?= $link->url('character.updateCharacterPage', ['id' => $character->getId()]) ?>" class="btn btn-outline-info btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="<?= $link->url("character.delete", ["id" => $character->getId()]) ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this character?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </div>
+                    <?php   }
+                    } ?>
                 </div>
             <?php endforeach;
         ?>

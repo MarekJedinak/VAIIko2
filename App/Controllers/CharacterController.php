@@ -8,11 +8,32 @@ use App\Core\Responses\JsonResponse;
 use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
 use App\Models\Character;
+use App\Models\Permission;
 use App\Models\User;
 
 class CharacterController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        switch($action) {
 
+            case "save_character":
+            case "delete":
+            case "update":
+            {
+                $char_id = $this->request()->getValue("id");
+                $cha = Character::getOne($char_id);
+                if ($this->app->getAuth()->getLoggedUserId() == $cha->getUserId()) {
+                    return true;
+                }
+                return false;
+            }
+            default:
+            {
+                return true;
+            }
+        }
+    }
     public function index(): Response
     {
         return $this->html([
@@ -84,6 +105,7 @@ class CharacterController extends AControllerBase
         $character->setCharacterDescription($description);
         $character->setCharacterImage($photo);
         $character->setAuthor($user->getUsername());
+        $character->setUserId($user->getId());
         $character->save();
 
         $output = 1;
@@ -101,7 +123,7 @@ class CharacterController extends AControllerBase
         return $this->redirect($this->url("character.charactersPage"));
     }
 
-    public function update() : Response
+    public function update() : JsonResponse
     {
         $characterId = $this->request()->getValue('characterId');
         $characterName = $this->request()->getValue('characterName');
@@ -110,6 +132,9 @@ class CharacterController extends AControllerBase
         $characterImage = $this->request()->getFiles()['characterImage']['name'];
 
         $deleteCharacter = Character::getOne($characterId);
+        $characterAuthor = $deleteCharacter->getAuthor();
+        $characterUserId = $deleteCharacter->getUserId();
+
         $deleteCharacter->delete();
 
         $newCharacter = new Character();
@@ -118,19 +143,14 @@ class CharacterController extends AControllerBase
         $newCharacter->setCharacterClass($characterClass);
         $newCharacter->setCharacterDescription($characterDescription);
         $newCharacter->setCharacterImage($characterImage);
+        $newCharacter->setAuthor($characterAuthor);
+        $newCharacter->setUserId($characterUserId);
 
-        $formErrors = $this->formErrors();
-        if (count($formErrors)) {
-            return $this->html(
-                [
-                    'character' => $characterId,
-                    'errors' => $formErrors,
-                ], 'createCharacterPage'
-            );
-        } else {
-            $newCharacter->save();
-            return new RedirectResponse($this->url("character.charactersPage"));
-        }
+
+        $newCharacter->save();
+        $output = 1;
+        return $this->json(["output" => $output]);
+
     }
 
     public function formErrors(): array {
